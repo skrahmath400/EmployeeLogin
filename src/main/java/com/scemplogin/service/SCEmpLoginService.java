@@ -56,6 +56,9 @@ public class SCEmpLoginService {
 					// Generate JWT token
 					int empId = employee.getEmpId();
 					String designation = employee.getDesignationName();
+					String campusName = employee.getCampusName();
+					String category = employee.getCategory();
+					String campusCategory = employee.getCmpsCategory();
 					try {
 						JwtResponse jwt = tokenAuthorization.generateJwtForUser(empId);
 						log.info("JWT token generated successfully for empId: {}", empId);
@@ -63,23 +66,24 @@ public class SCEmpLoginService {
 						// Concatenate firstName and lastName for empName
 						String empName = employee.getFirstName() + " " + employee.getLastName();
 						// Return successful login response
-						return new LoginResponse(empName, empId,designation, jwt, true, "Login successful");
+						return new LoginResponse(empName, empId, designation, campusName, campusCategory, category, jwt,
+								true, "Login successful");
 					} catch (Exception e) {
 						log.error("Failed to generate JWT token for empId: {}. Error: {}", empId, e.getMessage(), e);
-						return new LoginResponse(null, 0,null, null, false,
+						return new LoginResponse(null, 0, null, null, null, null, null, false,
 								"Failed to generate JWT token: " + e.getMessage());
 					}
 				} else {
 					log.warn("Password verification failed for email: {}", login.getEmail());
-					return new LoginResponse(null, 0,null, null, false, "Password Incorrect");
+					return new LoginResponse(null, 0, null, null, null, null, null, false, "Password Incorrect");
 				}
 			} else {
 				log.warn("User is not active for email: {}", login.getEmail());
-				return new LoginResponse(null, 0,null, null, false, "User is not active");
+				return new LoginResponse(null, 0, null, null, null, null, null, false, "User is not active");
 			}
 		} else {
 			log.warn("No employee found for email: {}", login.getEmail());
-			return new LoginResponse(null, 0,null, null, false, "Email is not existed");
+			return new LoginResponse(null, 0, null, null, null, null, null, false, "Email is not existed");
 		}
 	}
 }

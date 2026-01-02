@@ -32,5 +32,15 @@ public class SCEmployeeEntity {
 	@Column(name = "designation_name")
 	private String designationName;
 	
+	@Column(name= "emp_campus")
+	private String campusName;
+	
+	@Column(name="cmps_category")
+	private String cmpsCategory;
+
+	
+	@Column(name="emp_category")
+	private String category;
+	
 	private int isActive;
 }

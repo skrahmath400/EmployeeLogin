@@ -17,6 +17,10 @@ public class LoginResponse {
 	private int empId;
 	
 	private String designation;
+	private String campusCategory;
+	private String campusName;
+	
+	private String category;
 	
 	private JwtResponse jwt;
 	
